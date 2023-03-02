@@ -5,7 +5,7 @@ const Ground = () => {
     <>
       <mesh rotation-x={Math.PI * -0.5}>
         <planeGeometry args={[50, 50]} />
-        <meshNormalMaterial color={"#00FFFF"} side={DoubleSide} />
+        <meshNormalMaterial side={DoubleSide} />
       </mesh>
     </>
   );

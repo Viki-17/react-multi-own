@@ -27,38 +27,42 @@ const App = () => {
       });
     }
   }, [socketClient]);
-  return (
-    socketClient && (
-      <KeyboardControls
-        map={[
-          { name: "forward", keys: ["ArrowUp", "w", "W"] },
-          { name: "backward", keys: ["ArrowDown", "s", "S"] },
-          { name: "left", keys: ["ArrowLeft", "a", "A"] },
-          { name: "right", keys: ["ArrowRight", "d", "D"] },
-          { name: "jump", keys: ["Space"] },
-          { name: "shift", keys: ["Shift"] },
-        ]}
-      >
-        <Canvas>
-          <Ground />
-          <Player socket={socketClient} />
-          {Object.keys(clients)
-            .filter((clientKey) => clientKey !== socketClient.id)
-            .map((client) => {
-              const { position, rotation } = clients[client];
 
-              return (
-                <UserWrapper
-                  key={client}
-                  id={client}
-                  position={position}
-                  rotation={rotation}
-                />
-              );
-            })}
-        </Canvas>
-      </KeyboardControls>
-    )
+  return (
+    <>
+      {socketClient && (
+        <KeyboardControls
+          map={[
+            { name: "forward", keys: ["ArrowUp", "w", "W"] },
+            { name: "backward", keys: ["ArrowDown", "s", "S"] },
+            { name: "left", keys: ["ArrowLeft", "a", "A"] },
+            { name: "right", keys: ["ArrowRight", "d", "D"] },
+            { name: "jump", keys: ["Space"] },
+            { name: "shift", keys: ["Shift"] },
+          ]}
+        >
+          <Canvas>
+            <Ground />
+            <Player socket={socketClient} />
+            <gridHelper rotation={[0, 0, 0]} />
+            {Object.keys(clients)
+              .filter((clientKey) => clientKey !== socketClient.id)
+              .map((client) => {
+                const { position, rotation } = clients[client];
+                // console.log("app", clients);
+                return (
+                  <UserWrapper
+                    key={client}
+                    id={client}
+                    position={position}
+                    rotation={rotation}
+                  />
+                );
+              })}
+          </Canvas>
+        </KeyboardControls>
+      )}
+    </>
   );
 };
 

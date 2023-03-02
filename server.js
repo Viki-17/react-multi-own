@@ -50,11 +50,9 @@ ioServer.on("connection", (client) => {
 
   ioServer.sockets.emit("move", clients);
 
-  client.on("move", ({ id, rotation = [0, 0, 0], position = [0, 1, 0] }) => {
-    if (position) {
-      clients[id].position = position;
-      clients[id].rotation = rotation;
-    }
+  client.on("move", ({ id, rotation, position }) => {
+    clients[id].position = position;
+    clients[id].rotation = rotation;
 
     ioServer.sockets.emit("move", clients);
   });

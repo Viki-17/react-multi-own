@@ -5,7 +5,6 @@ import * as THREE from "three";
 
 const Player = ({ socket }) => {
   const [, get] = useKeyboardControls();
-  const [updateCallback, setUpdateCallback] = useState(null);
 
   const cubeRef = useRef();
 
@@ -34,7 +33,7 @@ const Player = ({ socket }) => {
         position: posArray,
       });
 
-      console.log("player", posArray);
+      // console.log("player", posArray);
 
       const cameraPosition = new THREE.Vector3();
       cameraPosition.copy(cubeRef.current.position);
@@ -54,9 +53,12 @@ const Player = ({ socket }) => {
   return (
     <mesh>
       <Box
-        //   position={[0, 1, 0]}
+        position={[0, 1, 0]}
         ref={cubeRef}
+
+        // visible={false}
       />
+      <meshNormalMaterial />
     </mesh>
   );
 };

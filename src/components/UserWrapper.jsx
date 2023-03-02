@@ -1,10 +1,10 @@
 import { Box, Text } from "@react-three/drei";
+import { useEffect } from "react";
 
 const UserWrapper = ({ position, rotation, id }) => {
-  console.log("userwrapper", position);
   return (
-    <mesh>
-      <Box position={position} />
+    <mesh position={position}>
+      <Box />
       {/* Optionally show the ID above the user's mesh */}
       <Text
         position={[0, 1.0, 0]}
